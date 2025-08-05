@@ -108,8 +108,15 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-secondary via-secondary/95 to-secondary/90">
-        <div className="container mx-auto px-4 text-center">
+      <section className="relative py-20 bg-gradient-to-br from-secondary via-secondary/95 to-secondary/90 overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <img 
+            src="/img/57ab1569-f477-4dd2-b73e-71826ba64d04.jpg" 
+            alt="Car dealership" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-5xl md:text-6xl font-bold text-primary mb-6">
             АВТО С ПРОБЕГОМ
           </h2>
@@ -125,6 +132,50 @@ const Index = () => {
             <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
               <Icon name="Calculator" size={20} className="mr-2" />
               Оценить авто
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Car Evaluation CTA Section */}
+      <section className="py-20 bg-primary relative overflow-hidden">
+        <div className="absolute inset-0 opacity-30">
+          <img 
+            src="/img/a1e677e7-1c31-4a15-b387-9fb8323a6f76.jpg" 
+            alt="Car evaluation" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h3 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
+            ОЦЕНИМ ВАШ АВТОМОБИЛЬ
+          </h3>
+          <p className="text-xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto">
+            Получите честную оценку стоимости вашего автомобиля от экспертов. 
+            Быстро, точно, бесплатно!
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-primary-foreground mb-2">15 МИН</div>
+              <div className="text-primary-foreground/80">Время оценки</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-primary-foreground mb-2">БЕСПЛАТНО</div>
+              <div className="text-primary-foreground/80">Никаких комиссий</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-primary-foreground mb-2">24/7</div>
+              <div className="text-primary-foreground/80">Работаем всегда</div>
+            </div>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" variant="secondary" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 text-lg px-8 py-4">
+              <Icon name="Calculator" size={24} className="mr-3" />
+              ОЦЕНИТЬ СЕЙЧАС
+            </Button>
+            <Button size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary text-lg px-8 py-4">
+              <Icon name="Phone" size={24} className="mr-3" />
+              ПОЗВОНИТЬ
             </Button>
           </div>
         </div>
@@ -250,32 +301,46 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                    <Icon name={service.icon as any} size={32} className="text-primary" />
+            {services.map((service, index) => {
+              const serviceImages = [
+                '/img/213e24a3-87ca-4dde-964b-673d8166d577.jpg',
+                '/img/a1e677e7-1c31-4a15-b387-9fb8323a6f76.jpg',
+                '/img/57ab1569-f477-4dd2-b73e-71826ba64d04.jpg'
+              ];
+              return (
+                <Card key={index} className="text-center hover:shadow-lg transition-shadow overflow-hidden">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img 
+                      src={serviceImages[index]} 
+                      alt={service.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
-                  <CardTitle className="text-xl">{service.title}</CardTitle>
-                  <CardDescription className="text-muted-foreground">
-                    {service.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center justify-center">
-                        <Icon name="Check" size={16} className="text-primary mr-2" />
-                        <span className="text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardFooter>
-                  <Button className="w-full">Узнать подробнее</Button>
-                </CardFooter>
-              </Card>
-            ))}
+                  <CardHeader>
+                    <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 -mt-8 relative z-10 bg-background border-4 border-background">
+                      <Icon name={service.icon as any} size={32} className="text-primary" />
+                    </div>
+                    <CardTitle className="text-xl">{service.title}</CardTitle>
+                    <CardDescription className="text-muted-foreground">
+                      {service.description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2">
+                      {service.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center justify-center">
+                          <Icon name="Check" size={16} className="text-primary mr-2" />
+                          <span className="text-sm">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                  <CardFooter>
+                    <Button className="w-full">Узнать подробнее</Button>
+                  </CardFooter>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
